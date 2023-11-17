@@ -2,8 +2,9 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\API\StarwarsCharctersController;
+use App\Http\Controllers\API\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,9 @@ use App\Http\Controllers\API\StarwarsCharctersController;
 |
 */
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
 
-});
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [RegisterController::class, 'login']);
+
+
 Route::get('swcharacters', [StarwarsCharctersController::class, 'index']);

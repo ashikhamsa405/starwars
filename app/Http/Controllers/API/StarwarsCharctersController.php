@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+
 use App\Services\Starwars\SwCharcterFeilds;
 use App\Http\Requests\StarWarsRequest;
 use App\Contracts\Starwars\swcharctersprovider;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class StarwarsCharctersController extends Controller
+class StarwarsCharctersController extends BaseController
 {
 
 
@@ -31,11 +32,9 @@ class StarwarsCharctersController extends Controller
         $data = $this->swcharctersprovider->getSwCharcters($request->page);
         //setting up  the response 
         $result = $this->swCharcterFeilds->transform($data);
+        //return respone as json
+        return $this->sendResponse($result['data'], $result['message']);
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $result,
-        ]);
 
     }
 

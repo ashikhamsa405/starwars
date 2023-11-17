@@ -9,9 +9,12 @@ class SwCharcterFeilds
 
       
         if ($input == null) {
-            return null;
+            $result['data'] =  null;
+            $result['message'] = 'No characters Found';
+            return $result;
+
         }    
-        $result = collect($input->results)->map(function ($item) {
+        $result['data'] = collect($input->results)->map(function ($item) {
             return [
                 'name' => $item->name,
                 'height' => $item->height,
@@ -21,6 +24,8 @@ class SwCharcterFeilds
                 'gender' => $item->gender,
             ];
         })->toArray();
+        $result['message'] = 'Charcters retrieved successfully';
+        
         return $result;
     }
 }
